@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday Kowshi!</title>
+    <style>
+        body {
+            background-color: pink;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .nav-menu {
+            position: absolute;
+            top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            background-color: white;
+            color: pink;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            background-color: lightpink;
+        }
+
+        .cake-container {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            z-index: 5;
+        }
+
+        .cake {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cake-layer {
+            position: absolute;
+            width: 100%;
+            border-radius: 15px;
+            left: 0;
+        }
+
+        .cake-bottom {
+            height: 120px;
+            background: linear-gradient(to bottom, #8B4513, #5D3A1A);
+            bottom: 0;
+        }
+
+        .cake-middle {
+            height: 90px;
+            background: linear-gradient(to bottom, #D2691E, #CD853F);
+            bottom: 120px;
+            width: 90%;
+            left: 5%;
+        }
+
+        .cake-top {
+            height: 60px;
+            background: linear-gradient(to bottom, #8B4513, #5D3A1A);
+            bottom: 210px;
+            width: 80%;
+            left: 10%;
+        }
+
+        .candle {
+            width: 15px;
+            height: 60px;
+            background: linear-gradient(to right, white, #F0F0F0);
+            position: absolute;
+            bottom: 270px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        #candle1 { left: 25%; }
+        #candle2 { left: 40%; }
+        #candle3 { left: 60%; }
+        #candle4 { left: 75%; }
+
+        .flame {
+            width: 15px;
+            height: 25px;
+            background: radial-gradient(circle at 50% 50%, #FFD700, #FFA500, #FF4500);
+            position: absolute;
+            top: -25px;
+            left: 0px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flickerFlame 0.1s infinite alternate;
+            box-shadow: 0 0 20px rgba(255,165,0,0.7);
+        }
+
+        @keyframes flickerFlame {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .birthday-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 192, 203, 0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .birthday-message h1 {
+            font-size: 4em;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .birthday-message p {
+            font-size: 1.5em;
+            color: white;
+        }
+
+        /* Heart Animation Styles */
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .heart-container {
+            position: absolute;
+            animation: float 6s infinite ease-in-out;
+        }
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            transform: rotate(-45deg);
+            opacity: 0.7;
+        }
+        .heart:before,
+        .heart:after {
+            content: "";
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart:before {
+            top: -15px;
+            left: 0;
+        }
+        .heart:after {
+            top: 0;
+            left: 15px;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .instructions {
+            color: white;
+            background-color: rgba(255, 105, 180, 0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h2>Click to blow out the candles!</h2>
+    </div>
+
+    <div class="cake-container">
+        <div class="cake">
+            <div class="cake-layer cake-bottom"></div>
+            <div class="cake-layer cake-middle"></div>
+            <div class="cake-layer cake-top"></div>
+            <div class="candle" id="candle1"><div class="flame"></div></div>
+            <div class="candle" id="candle2"><div class="flame"></div></div>
+            <div class="candle" id="candle3"><div class="flame"></div></div>
+            <div class="candle" id="candle4"><div class="flame"></div></div>
+        </div>
+    </div>
+
+    
+
+    <!-- Added hearts container -->
+    <div class="hearts"></div>
+
+    <script>
+        // Create hearts as soon as page loads
+        createHearts();
+        
+        // Setup cake interaction when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setupCakeInteraction();
+        });
+
+        function setupCakeInteraction() {
+            const candles = document.querySelectorAll('.candle');
+            let blownCandles = 0;
+            
+            candles.forEach(candle => {
+                candle.addEventListener('click', () => {
+                    const flame = candle.querySelector('.flame');
+                    if (flame && flame.style.display !== 'none') {
+                        flame.style.display = 'none';
+                        blownCandles++;
+
+                        if (blownCandles === 4) {
+                            window.location.href = 'wishes.html';
+                        }
+                    }
+                });
+            });
+        }
+
+        function showBirthdayMessage() {
+            const birthdayMessage = document.getElementById('birthday-message');
+            birthdayMessage.style.display = 'flex';
+        }
+
+        // Added heart creation function
+        function createHearts() {
+            const heartContainer = document.querySelector('.hearts');
+            const numberOfHearts = 20;
+            
+            for (let i = 0; i < numberOfHearts; i++) {
+                let heartWrapper = document.createElement('div');
+                heartWrapper.classList.add('heart-container');
+                
+                let heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                // Random size for variety
+                const size = 15 + Math.random() * 25;
+                heart.style.width = `${size}px`;
+                heart.style.height = `${size}px`;
+                
+                // Apply same size to pseudo-elements
+                const styleSheet = document.styleSheets[0];
+                const ruleIndex = styleSheet.cssRules.length;
+                
+                const uniqueClass = `heart-${i}`;
+                heart.classList.add(uniqueClass);
+                
+                styleSheet.insertRule(`.${uniqueClass}:before, .${uniqueClass}:after { width: ${size}px; height: ${size}px; }`, ruleIndex);
+                styleSheet.insertRule(`.${uniqueClass}:before { top: -${size/2}px; }`, ruleIndex + 1);
+                styleSheet.insertRule(`.${uniqueClass}:after { left: ${size/2}px; }`, ruleIndex + 2);
+                
+                // Random color shades
+                const hue = Math.random() > 0.5 ? 0 : 340; // Red or pink
+                const saturation = 70 + Math.random() * 30;
+                const lightness = 50 + Math.random() * 30;
+                const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                
+                heart.style.backgroundColor = color;
+                styleSheet.insertRule(`.${uniqueClass}:before, .${uniqueClass}:after { background-color: ${color}; }`, ruleIndex + 3);
+                
+                heartWrapper.appendChild(heart);
+                
+                // Random position and animation
+                heartWrapper.style.left = `${Math.random() * 100}vw`;
+                heartWrapper.style.animationDuration = `${5 + Math.random() * 7}s`;
+                heartWrapper.style.animationDelay = `${Math.random() * 5}s`;
+                
+                heartContainer.appendChild(heartWrapper);
+            }
+        }
+    </script>
+</body>
+</html>

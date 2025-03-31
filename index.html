@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday Kowshi!</title>
+    <style>
+        body {
+            background-color: pink;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .login-container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease;
+            z-index: 5;
+            position: relative;
+        }
+
+        .login-container h1 {
+            color: pink;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        .login-container input {
+            padding: 12px;
+            margin: 15px 0;
+            width: 250px;
+            border: 3px solid pink;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .login-container input:focus {
+            border-color: hotpink;
+        }
+
+        .login-container button {
+            background-color: pink;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .login-container button:hover {
+            background-color: hotpink;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Heart Animation Styles */
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .heart-container {
+            position: absolute;
+            animation: float 6s infinite ease-in-out;
+        }
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            transform: rotate(-45deg);
+            opacity: 0.7;
+        }
+        .heart:before,
+        .heart:after {
+            content: "";
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart:before {
+            top: -15px;
+            left: 0;
+        }
+        .heart:after {
+            top: 0;
+            left: 15px;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="login-section" class="login-container">
+        <h1>Hi Barbie Doll</h1>
+        <input type="password" id="password" placeholder="Enter Password">
+        <br>
+        <button onclick="checkPassword()">Enter</button>
+    </div>
+
+    <!-- Added hearts container -->
+    <div class="hearts"></div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === 'Pookiee') {
+                // Navigate to cakes.html after correct password
+                window.location.href = 'cake.html';
+            } else {
+                alert('Incorrect password. Try again!');
+            }
+        }
+
+        // Added heart creation function
+        function createHearts() {
+            const heartContainer = document.querySelector('.hearts');
+            const numberOfHearts = 20;
+            
+            for (let i = 0; i < numberOfHearts; i++) {
+                let heartWrapper = document.createElement('div');
+                heartWrapper.classList.add('heart-container');
+                
+                let heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                // Random size for variety
+                const size = 15 + Math.random() * 25;
+                heart.style.width = `${size}px`;
+                heart.style.height = `${size}px`;
+                
+                // Apply same size to pseudo-elements
+                const styleSheet = document.styleSheets[0];
+                const ruleIndex = styleSheet.cssRules.length;
+                
+                const uniqueClass = `heart-${i}`;
+                heart.classList.add(uniqueClass);
+                
+                styleSheet.insertRule(`.${uniqueClass}:before, .${uniqueClass}:after { width: ${size}px; height: ${size}px; }`, ruleIndex);
+                styleSheet.insertRule(`.${uniqueClass}:before { top: -${size/2}px; }`, ruleIndex + 1);
+                styleSheet.insertRule(`.${uniqueClass}:after { left: ${size/2}px; }`, ruleIndex + 2);
+                
+                // Random color shades
+                const hue = Math.random() > 0.5 ? 0 : 340; // Red or pink
+                const saturation = 70 + Math.random() * 30;
+                const lightness = 50 + Math.random() * 30;
+                const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                
+                heart.style.backgroundColor = color;
+                styleSheet.insertRule(`.${uniqueClass}:before, .${uniqueClass}:after { background-color: ${color}; }`, ruleIndex + 3);
+                
+                heartWrapper.appendChild(heart);
+                
+                // Random position and animation
+                heartWrapper.style.left = `${Math.random() * 100}vw`;
+                heartWrapper.style.animationDuration = `${5 + Math.random() * 7}s`;
+                heartWrapper.style.animationDelay = `${Math.random() * 5}s`;
+                
+                heartContainer.appendChild(heartWrapper);
+            }
+        }
+
+        // Call the heart creation function
+        createHearts();
+    </script>
+</body>
+</html>

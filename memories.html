@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Memories</title>
+    <style>
+        body {
+            background-color: pink;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .nav-menu {
+            position: absolute;
+            top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            background-color: white;
+            color: pink;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            background-color: lightpink;
+        }
+
+        .memories-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+        }
+
+        .memory-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+        }
+
+        .memory-card h2 {
+            color: pink;
+            margin-bottom: 15px;
+        }
+
+        .memory-card p {
+            color: #333;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-menu">
+        <a href="cake.html">Cake</a>
+        <a href="surprise.html">Surprise</a>
+        <a href="letter.html">Letter</a>
+    </div>
+
+    <div class="memories-container">
+        <div class="memory-card">
+            <h2>First Memory</h2>
+            <p>Remember that amazing day when we first met? The laughter, the joy, the instant connection - it was magical!</p>
+        </div>
+        <div class="memory-card">
+            <h2>Favorite Moment</h2>
+            <p>That time we spent the whole day exploring the city, getting lost, and creating memories that will last a lifetime.</p>
+        </div>
+        <div class="memory-card">
+            <h2>Unforgettable Adventure</h2>
+            <p>Our spontaneous road trip where everything went hilariously wrong but turned out to be the best day ever!</p>
+        </div>
+    </div>
+</body>
+</html>
